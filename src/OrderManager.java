@@ -6,11 +6,15 @@ public class OrderManager {
 
   ArrayList<String> pizza = new ArrayList<>();
 
-  public void addNewOrder(int[] pizzaNums) {
-    Pizza[] pizzas = new Pizza[pizzaNums.length];
+  public void addNewOrder(ArrayList<Integer> pizzaNums) {
+    ArrayList<Pizza> pizzas = new ArrayList<>(pizzaNums.size());
 
-    for (int i = 0; i < pizzas.length; i++) {
-      pizzas[i] = Menu.getPizzaMenu()[pizzaNums[i]];
+    for (int i = 0; i < pizzaNums.size(); i++) {
+      //If the value at the specified index is less than zero then Command has spotted an error in the command
+      //We do not want to add that negative value to the active orders
+      if (pizzaNums.get(i) > 0) {
+        pizzas.add(Menu.getPizzaMenu()[pizzaNums.get(i)]);
+      }
     }
 
     Order newOrder = new Order(pizzas);

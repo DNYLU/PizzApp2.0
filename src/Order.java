@@ -1,9 +1,11 @@
+import java.util.ArrayList;
+
 public class Order {
   private int id;
-  private Pizza[] pizzas;
+  private ArrayList<Pizza> pizzas;
   private double totalPrice;
 
-  public Order(Pizza[] pizzas) {
+  public Order(ArrayList<Pizza> pizzas) {
     this.pizzas = pizzas;
   }
 }
