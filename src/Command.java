@@ -42,7 +42,6 @@ public class Command {
         create();
         break;
       case LIST_COMMAND:
-        list();
         break;
       //If the user typed "exit" then run is equal to false
       //So when the program returns to PizzApp the while loop will terminate, effectively exiting the program

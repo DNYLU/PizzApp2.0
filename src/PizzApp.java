@@ -5,14 +5,17 @@ public class PizzApp {
   private Scanner scan = new Scanner(System.in);
 
   public static void main(String[] args) {
+    PizzApp pizzApp = new PizzApp();
+    pizzApp.run();
   }
 
   public void run() {
-    //Boolean that is responsible for weather or not the program should be running
+    //run is responsible for weather or not the program should be running
     boolean run = true;
 
     while (run) {
-      String userCommand = this.scan.nextLine();
+      String userCommand = this.scan.nextLine().toLowerCase().trim();
+
       Command command = new Command(userCommand, this.orderManager);
       run = command.evaluateCommand();
     }
