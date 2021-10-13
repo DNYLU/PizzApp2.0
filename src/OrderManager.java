@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class OrderManager {
-  private ArrayList<Order> activeOrders;
-  private ArrayList<Order> storedOrders;
+  private ArrayList<Order> activeOrders = new ArrayList<>();
+  private ArrayList<Order> storedOrders = new ArrayList<>();
 
   ArrayList<String> pizza = new ArrayList<>();
 
@@ -13,10 +13,11 @@ public class OrderManager {
       //If the value at the specified index is less than zero then Command has spotted an error in the command
       //We do not want to add that negative value to the active orders
       if (pizzaNums.get(i) > 0) {
-        pizzas.add(Menu.getPizzaMenu()[pizzaNums.get(i)]);
+        pizzas.add(Menu.getPizzaMenu().get(pizzaNums.get(i)));
       }
     }
 
+    //Instantiates a new order with all the specified pizzas in it
     Order newOrder = new Order(pizzas);
     activeOrders.add(newOrder);
   }
