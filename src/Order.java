@@ -9,11 +9,11 @@ public class Order {
     this.setPizzas(pizzas);
   }
 
-  public String toString() {
-    return "Order ID: " + this.id + ", Pizza: " + this.pizzas.toString() + ", Price: " + this.totalPrice;
-  }
-
   public void setPizzas(ArrayList<Pizza> pizzas) {
     this.pizzas = pizzas;
+  }
+
+  public String toString() {
+    return "Order ID: " + this.id + ", Pizza: " + this.pizzas.toString() + ", Price: " + this.totalPrice;
   }
 }

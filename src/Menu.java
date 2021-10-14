@@ -14,8 +14,8 @@ public class Menu {
     Pizza victoria = new Pizza(8, "Victoria", "tomatsauce, ost, skinke, ananas, champignon, løg og oregano.", 61.00);
     Pizza toronfo = new Pizza(9, "Toronfo", "tomatsauce, ost, skinke, bacon, kebab, chili og oregano.", 61.00);
     Pizza capricciosa = new Pizza(10, "Capricciosa", "tomatsauce, ost, skinke, champignon og oregano.", 61.00);
-    Pizza hawai = new Pizza(11, "Hawaii", "tomatsauce, ost, skinke, ananas og oregano.", 61.00);
-    Pizza leBlissola = new Pizza(12, "Le_Blissola", "tomatsauce, ost, skinke, rejer og oregano.", 61.00);
+    Pizza hawaii = new Pizza(11, "Hawaii", "tomatsauce, ost, skinke, ananas og oregano.", 61.00);
+    Pizza leBlissola = new Pizza(12, "Le Blissola", "tomatsauce, ost, skinke, rejer og oregano.", 61.00);
     Pizza venezia = new Pizza(13, "Venezia", "tomatsauce, ost, skinke, bacon og oregano.", 61.00);
     Pizza mafia = new Pizza(14, "Mafia", "tomatsauce, ost, pepperoni, bacon, løg og oregano.", 61.00);
 
@@ -29,7 +29,7 @@ public class Menu {
     pizzaMenu.add(victoria);
     pizzaMenu.add(toronfo);
     pizzaMenu.add(capricciosa);
-    pizzaMenu.add(hawai);
+    pizzaMenu.add(hawaii);
     pizzaMenu.add(leBlissola);
     pizzaMenu.add(venezia);
     pizzaMenu.add(mafia);
@@ -38,5 +38,14 @@ public class Menu {
 
   public static ArrayList<Pizza> getPizzaMenu() {
     return Menu.pizzaMenu;
+  }
+
+  public void listMenu() {
+    System.out.println("-------------------------------------------------------------------------------------");
+    for (int i = 0; i < pizzaMenu.size(); i++){
+
+      System.out.println((i + 1) + ": " + pizzaMenu.get(i));
+    }
+    System.out.println("-------------------------------------------------------------------------------------");
   }
 }
