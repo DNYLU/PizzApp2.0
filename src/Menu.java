@@ -14,14 +14,15 @@ public class Menu {
     Pizza victoria = new Pizza(8, "Victoria", "tomatsauce, ost, skinke, ananas, champignon, løg og oregano.", 61.00);
     Pizza toronfo = new Pizza(9, "Toronfo", "tomatsauce, ost, skinke, bacon, kebab, chili og oregano.", 61.00);
     Pizza capricciosa = new Pizza(10, "Capricciosa", "tomatsauce, ost, skinke, champignon og oregano.", 61.00);
-    Pizza hawai = new Pizza(11, "Hawai", "tomatsauce, ost, skinke, ananas og oregano.", 61.00);
-    Pizza le_Blissola = new Pizza(12, "Le_Blissola", "tomatsauce, ost, skinke, rejer og oregano.", 61.00);
+    Pizza hawai = new Pizza(11, "Hawaii", "tomatsauce, ost, skinke, ananas og oregano.", 61.00);
+    Pizza leBlissola = new Pizza(12, "Le_Blissola", "tomatsauce, ost, skinke, rejer og oregano.", 61.00);
     Pizza venezia = new Pizza(13, "Venezia", "tomatsauce, ost, skinke, bacon og oregano.", 61.00);
     Pizza mafia = new Pizza(14, "Mafia", "tomatsauce, ost, pepperoni, bacon, løg og oregano.", 61.00);
 
     pizzaMenu.add(vesuvio);
     pizzaMenu.add(amerikaner);
     pizzaMenu.add(cacciatore);
+
   }
 
   public static ArrayList<Pizza> getPizzaMenu() {

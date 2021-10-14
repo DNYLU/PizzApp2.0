@@ -38,6 +38,7 @@ public class OrderManager {
     for (int i = 0; i < activeOrders.size(); i++){
 
       System.out.println((i + 1) + ": " + activeOrders.get(i));
+      System.out.println();
     }
   }
 
