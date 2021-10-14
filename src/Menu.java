@@ -22,6 +22,17 @@ public class Menu {
     pizzaMenu.add(vesuvio);
     pizzaMenu.add(amerikaner);
     pizzaMenu.add(cacciatore);
+    pizzaMenu.add(carbona);
+    pizzaMenu.add(dennis);
+    pizzaMenu.add(bertil);
+    pizzaMenu.add(silvia);
+    pizzaMenu.add(victoria);
+    pizzaMenu.add(toronfo);
+    pizzaMenu.add(capricciosa);
+    pizzaMenu.add(hawai);
+    pizzaMenu.add(leBlissola);
+    pizzaMenu.add(venezia);
+    pizzaMenu.add(mafia);
 
   }
 

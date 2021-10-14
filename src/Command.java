@@ -8,6 +8,7 @@ public class Command {
   private OrderManager orderManager;
 
   private final String CREATE_COMMAND = "new";
+  private final String STORE_COMMAND = "store";
   private final String LIST_COMMAND = "ls";
   private final String EXIT_COMMAND = "exit";
 
@@ -16,38 +17,44 @@ public class Command {
   private final String ACTIVE_ORDER_SPECIFIER = "active";
   private final String STORED_ORDER_SPECIFIER = "stored";
 
+  private final String COMMAND_ARGUMENT_SPLITTER = ":";
+
   public Command(String command, OrderManager orderManager) {
-    //split is used to split the String command up for each white space
-    //\s+ is regular expression for 1 or more spaces
-    ArrayList<String> commandArray = new ArrayList<>(List.of(command.split("\s+")));
+    //We instantiate two strings, one to store the primaryCommand and commandSpecifier and one to store the arguments
+    String commandAndSpecifier;
+    String arguments = "";
+    //If there is a token representing a split between the primaryCommand and commandSpecifier then we execute this if block
+    if (command.contains(this.COMMAND_ARGUMENT_SPLITTER)) {
+      //We use .substring to get the parts of the string we want and trim it to remove whitespace as it could cause errors
+      commandAndSpecifier = command.substring(0, command.indexOf(this.COMMAND_ARGUMENT_SPLITTER)).trim();
+      //We add 1 to the index of the substring otherwise the program would also add the command argument splitter token to argumentsArray
+      arguments = command.substring(command.indexOf(this.COMMAND_ARGUMENT_SPLITTER) + 1).trim();
+    } else {
+      //If there is no token representing the split then we simply set the commandAndSpecifier to be the entire command
+      commandAndSpecifier = command;
+    }
+
+    //Here we instantiate two ArrayLists one to store the primaryCommand and the commandSpecifier
+    //And one to store the arguments
+    //\s+ is regular expression for 1 or more white spaces
+    ArrayList<String> commandArray = new ArrayList<>(List.of(commandAndSpecifier.split("\s+")));
+    ArrayList<String> argumentArray = new ArrayList<>(List.of(arguments.split("\s+")));
 
     //Sets the command that is to be executed when it is evaluated
     this.setPrimaryCommand(commandArray.get(0));
 
-    //If there are more inputs from the user than the primary command we set them in the following if statements
-    //The first if statement sets the commandSpecifier
+    //if there is one or more elements in the CommandArray then the program will set the second element as the commandSpecifier
     if (commandArray.size() > 1) {
-      //Removes the first element in the command array which was set to be the primaryCommand
-      commandArray.remove(0);
-      //Sets the command specifier which handles what part of the orderManager the command interacts with
-      this.setCommandSpecifier(commandArray.get(0));
-
-      //This if statement sets the arguments
-      if (commandArray.size() > 0) {
-        //Removes the first element in the commandArray which used to be the primaryCommand but is now the CommandSpecifier
-        commandArray.remove(0);
-        //Sets the arguments which adds data to the primaryCommand
-        this.setArguments(commandArray);
-      }
+      this.setCommandSpecifier(commandArray.get(1));
     }
 
-    //Sets the orderManager which is the same as the one in PizzApp
+    this.setArguments(argumentArray);
+
+    //Sets the orderManager which is the same as the orderManager in pizzApp
     this.setOrderManager(orderManager);
   }
 
   public boolean evaluateCommand() {
-
-
     //Return value that is responsible for whether the program should continue its execution
     boolean run = true;
 
@@ -55,6 +62,8 @@ public class Command {
     switch (this.primaryCommand) {
       case CREATE_COMMAND:
         create();
+        break;
+      case STORE_COMMAND:
         break;
       case LIST_COMMAND:
         list();
@@ -86,6 +95,22 @@ public class Command {
     }
   }
 
+  public void list() {
+    switch (this.commandSpecifier) {
+      case ACTIVE_ORDER_SPECIFIER:
+        this.orderManager.printActiveOrders();
+        break;
+      case STORED_ORDER_SPECIFIER:
+        this.orderManager.printStoredOrders();
+        break;
+      default:
+        this.invalidCommandSpecifier();
+        break;
+    }
+  }
+
+  //Checks if the arguments are within the range of the menu
+  //Calls on the orderManager to create a new order with the given pizza number
   public void newOrder() {
     //We instantiate a new ArrayList to store the pizza numbers in
     ArrayList<Integer> pizzaNums = new ArrayList<>();
@@ -124,18 +149,12 @@ public class Command {
     this.orderManager.printActiveOrders();
   }
 
-  public void list() {
-    switch (this.commandSpecifier) {
-      case ACTIVE_ORDER_SPECIFIER:
-        this.orderManager.printActiveOrders();
-        break;
-      case STORED_ORDER_SPECIFIER:
-        this.orderManager.printStoredOrders();
-        break;
-      default:
-        this.invalidCommandSpecifier();
-        break;
-    }
+  public void newPizza() {
+
+  }
+
+  public void storeOrder() {
+
   }
 
   //displayInvalidInput is called by all other methods that prints out errors to the console
@@ -149,20 +168,28 @@ public class Command {
 
   //commandNotExecuted prints out the part of the command that is not valid
   //It also prints out the command type, primaryCommand or commandSpecifier
+  //It then calls the displayInvalidInput method
   public void commandNotExecuted(String input, String commandType) {
     System.out.println("Your command was not executed see below:");
     System.out.println("\t" + input + " is not a valid " + commandType);
     displayInvalidInput();
   }
 
+  //Is called when a primaryCommand is invalid
+  //It calls commandNotExecuted and passes the primaryCommand as the input and command as the commandType
   public void invalidPrimaryCommand() {
     commandNotExecuted(this.primaryCommand, "command");
   }
 
+  //Is called when a commandSpecifier is invalid
+  //it calls commandNotExecuted() and passes the commandSpecifier as the input and commandSpecifier as the commandType
   public void invalidCommandSpecifier() {
     commandNotExecuted(this.commandSpecifier, "command specifier");
   }
 
+  //If an order could not be created then this method is called, it prints out that the order could not be created
+  //It also gives the reason why the order could not be created
+  //Then it calls displayInvalidInput method
   public void orderNotCreated(String reason) {
     System.out.println("Order was not created see below:");
     System.out.println("\t" + reason);
