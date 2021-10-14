@@ -8,7 +8,12 @@ public class Order {
   public Order(ArrayList<Pizza> pizzas) {
     this.setPizzas(pizzas);
   }
+
   public String toString() {
-    return "Order ID: " + this.id + "\nPizza: " + this.pizzas.toString() + "\nPrice: " + this.totalPrice;
+    return "Order ID: " + this.id + ", Pizza: " + this.pizzas.toString() + ", Price: " + this.totalPrice;
+  }
+
+  public void setPizzas(ArrayList<Pizza> pizzas) {
+    this.pizzas = pizzas;
   }
 }
