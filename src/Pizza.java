@@ -31,6 +31,9 @@ public class Pizza {
   public String getName() {
     return this.name;
   }
+  public String toString() {
+    return this.name;
+  }
 
   //Setter pizzaens beskrivelse
   public void setDescription(String description) {
