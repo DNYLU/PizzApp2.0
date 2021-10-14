@@ -16,6 +16,8 @@ public class Command {
   private final String PIZZA_SPECIFIER = "pizza";
   private final String ACTIVE_ORDER_SPECIFIER = "active";
   private final String STORED_ORDER_SPECIFIER = "stored";
+  private final String MENU_SPECIFIER = "menu";
+
 
   private final String COMMAND_ARGUMENT_SPLITTER = ":";
 
@@ -102,6 +104,10 @@ public class Command {
         break;
       case STORED_ORDER_SPECIFIER:
         this.orderManager.printStoredOrders();
+        break;
+      case MENU_SPECIFIER:
+        Menu menu = new Menu();
+        menu.listMenu();
         break;
       default:
         this.invalidCommandSpecifier();
@@ -216,5 +222,4 @@ public class Command {
   public void setOrderManager(OrderManager orderManager) {
     this.orderManager = orderManager;
   }
-
 }
