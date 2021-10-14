@@ -6,6 +6,6 @@ public class Order {
   private double totalPrice;
 
   public Order(ArrayList<Pizza> pizzas) {
-    this.pizzas = pizzas;
+    this.setPizzas(pizzas);
   }
 }
