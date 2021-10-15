@@ -1,5 +1,3 @@
-import jdk.swing.interop.SwingInterOpUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
@@ -21,6 +19,8 @@ public class Command {
   private final String ACTIVE_ORDER_SPECIFIER = "active";
   private final String STORED_ORDER_SPECIFIER = "stored";
   private final String MENU_SPECIFIER = "menu";
+  private final String FIRST_SPECIFIER = "first";
+  private final String INDEX_SPECIFIER = "index";
 
 
   private final String COMMAND_ARGUMENT_SPLITTER = ":";
@@ -70,6 +70,7 @@ public class Command {
         create();
         break;
       case STORE_COMMAND:
+        this.store();
         break;
       case LIST_COMMAND:
         list();
@@ -119,6 +120,15 @@ public class Command {
       default:
         this.invalidCommandSpecifier();
         break;
+    }
+  }
+
+  public void store() {
+    switch (this.commandSpecifier) {
+      case FIRST_SPECIFIER:
+        //Todo: call method that removes the first element from the active order list
+      case INDEX_SPECIFIER:
+        //Todo: call method that removes an order from the active order list via an index
     }
   }
 
