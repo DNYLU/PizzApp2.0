@@ -12,7 +12,7 @@ public class OrderManager {
     for (int i = 0; i < pizzaNums.size(); i++) {
       //If the value at the specified index is less than zero then Command has spotted an error in the command
       //We do not want to add that negative value to the active orders
-      if (pizzaNums.get(i) > 0) {
+      if (pizzaNums.get(i) >= 0) {
         pizzas.add(Menu.getPizzaMenu().get(pizzaNums.get(i)));
       }
     }
@@ -38,6 +38,8 @@ public class OrderManager {
     for (int i = 0; i < activeOrders.size(); i++){
 
       System.out.println((i + 1) + ": " + activeOrders.get(i));
+      System.out.println();
+      System.out.println();
     }
   }
 

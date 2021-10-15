@@ -6,6 +6,14 @@ public class Order {
   private double totalPrice;
 
   public Order(ArrayList<Pizza> pizzas) {
+    this.setPizzas(pizzas);
+  }
+
+  public void setPizzas(ArrayList<Pizza> pizzas) {
     this.pizzas = pizzas;
+  }
+
+  public String toString() {
+    return "Order ID: " + this.id + ", Pizza: " + this.pizzas.toString() + ", Price: " + this.totalPrice;
   }
 }
