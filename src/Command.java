@@ -1,5 +1,8 @@
+import jdk.swing.interop.SwingInterOpUtils;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDateTime;
 
 public class Command {
   private String primaryCommand;
@@ -10,6 +13,7 @@ public class Command {
   private final String CREATE_COMMAND = "new";
   private final String STORE_COMMAND = "store";
   private final String LIST_COMMAND = "ls";
+  private final String HELP_COMMAND = "help";
   private final String EXIT_COMMAND = "exit";
 
   private final String ORDER_SPECIFIER = "order";
@@ -69,6 +73,9 @@ public class Command {
         break;
       case LIST_COMMAND:
         list();
+        break;
+      case HELP_COMMAND:
+        this.printCommands();
         break;
       //If the user typed "exit" then run is equal to false
       //So when the program returns to PizzApp the while loop will terminate, effectively exiting the program
@@ -149,6 +156,7 @@ public class Command {
       }
       pizzaNums.add(pizzaNum);
     }
+
     //Here the program adds the newly created order to the active orders via the orderManager
     this.orderManager.addNewOrder(pizzaNums);
     //Here the program prints all the active orders to the console via the order Manager
@@ -163,12 +171,37 @@ public class Command {
 
   }
 
+  public void printCommands() {
+    String usedWith = ": used with the below options";
+    System.out.println("Below are the available commands:");
+    System.out.println("\t" + this.CREATE_COMMAND + usedWith);
+    System.out.println("\t\t" + this.ORDER_SPECIFIER + ": creates a new order");
+    System.out.println("\t\t\tRemember to add the pizzas via their index after an \":\". for example: new order : 1 2 3");
+
+    System.out.println();
+
+    System.out.println("\t" + this.LIST_COMMAND + usedWith);
+    System.out.println("\t\t" + this.ACTIVE_ORDER_SPECIFIER + ": lists all the active orders.");
+    System.out.println("\t\t" + this.STORED_ORDER_SPECIFIER + ": lists all the stored orders.");
+    System.out.println("\t\t" + this.MENU_SPECIFIER + ": lists the entire menu.");
+
+    System.out.println();
+
+    System.out.println("\t" + this.STORE_COMMAND + ": stores the order with the specified index from the active order list.");
+    System.out.println("\t\tFor example: " + this.STORE_COMMAND + " 1");
+
+    System.out.println();
+
+    System.out.println("\t" + this.EXIT_COMMAND + ": exits the program.");
+  }
+
   //displayInvalidInput is called by all other methods that prints out errors to the console
   //This methods displays the command entered by the user
   public void displayInvalidInput() {
     System.out.println("Your command:");
     System.out.println("\t" + this);
     //We add a new line to the console so everything looks more clean
+    System.out.println("type " + this.HELP_COMMAND + " to view all the commands.");
     System.out.println();
   }
 
@@ -177,7 +210,7 @@ public class Command {
   //It then calls the displayInvalidInput method
   public void commandNotExecuted(String input, String commandType) {
     System.out.println("Your command was not executed see below:");
-    System.out.println("\t" + input + " is not a valid " + commandType);
+    System.out.println("\t\"" + input + "\" is not a valid " + commandType);
     displayInvalidInput();
   }
 
