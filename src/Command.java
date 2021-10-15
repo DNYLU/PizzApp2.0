@@ -126,9 +126,11 @@ public class Command {
   public void store() {
     switch (this.commandSpecifier) {
       case FIRST_SPECIFIER:
-        //Todo: call method that removes the first element from the active order list
+        storeOrder();
+        break;
       case INDEX_SPECIFIER:
-        //Todo: call method that removes an order from the active order list via an index
+        storeOrder();
+        break;
     }
   }
 
@@ -178,7 +180,18 @@ public class Command {
   }
 
   public void storeOrder() {
-
+    int indexRemover;
+    try {
+      indexRemover = Integer.parseInt(this.arguments.get(0))-1;
+    } catch (NumberFormatException e) {
+      this.orderNotStored(this.arguments.get(0)+" is not a whole number!");
+      return;
+    }
+    if (indexRemover >= orderManager.getActiveOrders().size()) {
+      this.orderNotStored(this.arguments.get(0)+ " is greater than the range of the menu!");
+      return;
+    }
+    orderManager.popActiveOrder(indexRemover);
   }
 
   public void printCommands() {
@@ -241,6 +254,13 @@ public class Command {
   //Then it calls displayInvalidInput method
   public void orderNotCreated(String reason) {
     System.out.println("Order was not created see below:");
+    System.out.println("\t" + reason);
+
+    this.displayInvalidInput();
+  }
+
+  public void orderNotStored(String reason) {
+    System.out.println("Order was not stored see below:");
     System.out.println("\t" + reason);
 
     this.displayInvalidInput();

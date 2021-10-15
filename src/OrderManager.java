@@ -46,5 +46,7 @@ public class OrderManager {
   public void printStoredOrders() {
     System.out.println(storedOrders);
   }
-
+    public ArrayList<Order>getActiveOrders() {
+    return this.activeOrders;
+    }
 }
