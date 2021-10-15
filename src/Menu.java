@@ -3,9 +3,11 @@ import java.util.ArrayList;
 public class Menu {
   public static ArrayList<Pizza> pizzaMenu = new ArrayList<>();
 
+  private static final String COLUMN_FORMAT = "%d. %-15s %s%n"; // TEST
+
   public static void createMenu() {
     Pizza vesuvio = new Pizza(1, "Vesuvio", "tomatsauce, ost, skinke og oregano.", 57.00);
-    Pizza amerikaner = new Pizza(2, "Amerikaner", "tomatsauce, ost, oksefars og oregano.", 53.00);
+    Pizza amerikaner = new Pizza(2, "Amerikaner", "tomatsauce, ost, oksefars og oregan.", 53.00);
     Pizza cacciatore = new Pizza(3, "Cacciatore", "tomatsauce, ost, pepperoni og oregano.", 57.00);
     Pizza carbona = new Pizza(4, "Carbona", "tomatsauce, ost, kødsauce, spaghetti, cocktailpølser og oregano.", 63.00);
     Pizza dennis = new Pizza(5, "Dennis", "tomatsauce, ost, skinke, pepperoni, cocktailpølser og oregano.", 65.00);
@@ -42,8 +44,13 @@ public class Menu {
   public void listMenu() {
     System.out.println("-------------------------------------------------------------------------------------");
     for (int i = 0; i < pizzaMenu.size(); i++){
-      System.out.println((i + 1) + ": " + pizzaMenu.get(i));
+      //System.out.println((i + 1) + ": " + pizzaMenu.get(i));
+      System.out.print((i + 1) + ": " + pizzaMenu.get(i).getName() +", "+ pizzaMenu.get(i).getDescription() +" ");
+      System.out.printf(COLUMN_FORMAT, pizzaMenu.get(i).getPrice());
+     // System.out.format("%d. %-15s %s%n", pizzaMenu.get(i).getPrice());
+      System.out.println();
     }
     System.out.println("-------------------------------------------------------------------------------------");
+
   }
 }

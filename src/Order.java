@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.ArrayList;
 
 public class Order {
@@ -14,6 +16,6 @@ public class Order {
   }
 
   public String toString() {
-    return "Order ID: " + this.id + ", Pizza: " + this.pizzas.toString() + ", Price: " + this.totalPrice;
+    return ("Order ID: " + this.id + ", Pizza: " + this.pizzas.toString() + ", Price:" + this.totalPrice);
   }
 }
