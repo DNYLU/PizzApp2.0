@@ -1,8 +1,6 @@
-//import jdk.swing.interop.SwingInterOpUtils;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDateTime;
+import java.util.Scanner;
 
 public class Command {
   private String primaryCommand;
@@ -171,8 +169,10 @@ public class Command {
       pizzaNums.add(pizzaNum);
     }
 
+    ETA eta = this.createEta();
+
     //Here the program adds the newly created order to the active orders via the orderManager
-    this.orderManager.addNewOrder(pizzaNums);
+    this.orderManager.addNewOrder(pizzaNums, eta);
     //Here the program prints all the active orders to the console via the order Manager
     this.orderManager.printActiveOrders();
   }
@@ -194,6 +194,34 @@ public class Command {
       return;
     }
     orderManager.popActiveOrder(indexRemover);
+  }
+
+    //Todo: fix error that occurs when trying to enter an new order but only for the second time...
+  public ETA createEta() {
+    Scanner scanner = new Scanner(System.in);
+    boolean etaCreated = false;
+    ETA eta = null;
+
+    while (!etaCreated) {
+      System.out.println("Please enter how long before the customer arrives to pick up their order.");
+      System.out.println("minute: \"-m\" or hour: \"-h\" followed by how many minutes/hours.");
+      String etaInput = scanner.nextLine().toLowerCase().trim();
+      String[] etaInputArray = etaInput.split("\s+");
+
+      if (etaInputArray.length < 2) {
+        System.out.println("Invalid input.");
+      } else {
+        int time;
+        try {
+          time = Integer.parseInt(etaInputArray[1]);
+          eta = new ETA(etaInputArray[0], time);
+          etaCreated = true;
+        } catch (NumberFormatException e) {
+          //Todo: Print out error
+        }
+      }
+    }
+    return eta;
   }
 
   public void printCommands() {
