@@ -7,7 +7,7 @@ public class Menu {
     Pizza vesuvio = new Pizza(1, "Vesuvio", "tomatsauce, ost, skinke og oregano.", 57.00);
     Pizza amerikaner = new Pizza(2, "Amerikaner", "tomatsauce, ost, oksefars og oregano.", 53.00);
     Pizza cacciatore = new Pizza(3, "Cacciatore", "tomatsauce, ost, pepperoni og oregano.", 57.00);
-    Pizza carbona = new Pizza(4, "Carbona", "tomatsauce, ost, kødsauce, spagghetti, cocktailpølser og oregano.", 63.00);
+    Pizza carbona = new Pizza(4, "Carbona", "tomatsauce, ost, kødsauce, spaghetti, cocktailpølser og oregano.", 63.00);
     Pizza dennis = new Pizza(5, "Dennis", "tomatsauce, ost, skinke, pepperoni, cocktailpølser og oregano.", 65.00);
     Pizza bertil = new Pizza(6, "Bertil", "tomatsauce, ost, bacon og oregano.", 57.00);
     Pizza silvia = new Pizza(7, "Silvia", "tomatsauce, ost, pepperoni, rød peber, løg, oliven og oregano.", 61.00);
@@ -33,7 +33,6 @@ public class Menu {
     pizzaMenu.add(leBlissola);
     pizzaMenu.add(venezia);
     pizzaMenu.add(mafia);
-
   }
 
   public static ArrayList<Pizza> getPizzaMenu() {
@@ -43,7 +42,6 @@ public class Menu {
   public void listMenu() {
     System.out.println("-------------------------------------------------------------------------------------");
     for (int i = 0; i < pizzaMenu.size(); i++){
-
       System.out.println((i + 1) + ": " + pizzaMenu.get(i));
     }
     System.out.println("-------------------------------------------------------------------------------------");
