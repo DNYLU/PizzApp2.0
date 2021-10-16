@@ -126,7 +126,7 @@ public class Command {
   public void store() {
     switch (this.commandSpecifier) {
       case FIRST_SPECIFIER:
-        storeOrder();
+        this.orderManager.popActiveOrder();
         break;
       case INDEX_SPECIFIER:
         storeOrder();
@@ -182,21 +182,24 @@ public class Command {
   }
 
   public void storeOrder() {
-    int indexRemover;
-    try {
-      indexRemover = Integer.parseInt(this.arguments.get(0))-1;
-    } catch (NumberFormatException e) {
-      this.orderNotStored(this.arguments.get(0)+" is not a whole number!");
-      return;
+    ArrayList<Integer> indexRemover = new ArrayList<>(this.arguments.size());
+    for (int i = 0; i < this.arguments.size(); i++) {
+      try {
+        int index = Integer.parseInt(this.arguments.get(i))-1;
+        indexRemover.add(index);
+      } catch (NumberFormatException e) {
+        this.orderNotStored(this.arguments.get(i)+" is not a whole number!");
+        return;
+      }
+      if (indexRemover.get(i) >= orderManager.getActiveOrders().size()) {
+        this.orderNotStored(this.arguments.get(i)+ " is greater than the range of the menu!");
+        return;
+      }
     }
-    if (indexRemover >= orderManager.getActiveOrders().size()) {
-      this.orderNotStored(this.arguments.get(0)+ " is greater than the range of the menu!");
-      return;
-    }
+
     orderManager.popActiveOrder(indexRemover);
   }
 
-    //Todo: fix error that occurs when trying to enter an new order but only for the second time...
   public ETA createEta() {
     Scanner scanner = new Scanner(System.in);
     boolean etaCreated = false;

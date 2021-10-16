@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 public class Order {
   private int id;
@@ -21,6 +22,11 @@ public class Order {
 
   public ETA getEta() {
     return this.eta;
+  }
+
+  //Returns the LocalDateTime in the ETA class rather than the instance itself
+  public LocalDateTime getEtaTime() {
+    return this.eta.getEta();
   }
 
   public String toString() {

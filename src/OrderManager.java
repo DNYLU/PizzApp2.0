@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class OrderManager {
     private ArrayList<Order> activeOrders = new ArrayList<>();
@@ -30,7 +31,7 @@ public class OrderManager {
             for (int i = 0; i < this.activeOrders.size(); i++) {
                 //When we find the first order that has an eta after the new order we break the loop
                 //The program has found the index it needed
-                if (this.activeOrders.get(i).getEta().getEta().isAfter(order.getEta().getEta())) {
+                if (this.activeOrders.get(i).getEtaTime().isAfter(order.getEta().getEta())) {
                     orderIndex = i;
                     break;
                 }
@@ -41,15 +42,25 @@ public class OrderManager {
     }
 
     public void popActiveOrder() {
-        //Calls the popActiveOrders with an argument of 0 to simply remove the order at the beginning of the array.
-        this.popActiveOrder(0);
+        //Calls the popActiveOrders with an ArrayList that only contains a single element, which is 0
+        //So only the first element will be removed
+        ArrayList<Integer> firstElement = new ArrayList<>();
+        firstElement.add(0);
+        this.popActiveOrder(firstElement);
     }
 
-    public void popActiveOrder(int index) {
-        //Stores the order so Mario can calculate the revenue and do statistics.
-        this.storedOrders.add(this.activeOrders.get(index));
-        //Removes the order from active orders at the given index.
-        this.activeOrders.remove(index);
+    public void popActiveOrder(ArrayList<Integer> indexes) {
+        System.out.println(indexes);
+        Collections.sort(indexes);
+        System.out.println(indexes);
+
+        for (int i = indexes.size() - 1; i >= 0; i--) {
+            //Stores the order so that revenue and statistics can be made at a later time
+            this.storedOrders.add(this.activeOrders.get(indexes.get(i)));
+            //Removes the order from active orders at the given index.
+            this.activeOrders.remove(indexes.get(i).intValue());
+        }
+        this.printActiveOrders();
     }
 
     public void printActiveOrders() {
