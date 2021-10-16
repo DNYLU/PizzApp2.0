@@ -11,11 +11,9 @@ public class Order {
     this.setPizzas(pizzas);
     this.setEta(eta);
   }
-
   public void setPizzas(ArrayList<Pizza> pizzas) {
     this.pizzas = pizzas;
   }
-
   public void setEta(ETA eta) {
     this.eta = eta;
   }
@@ -25,11 +23,21 @@ public class Order {
   }
 
   //Returns the LocalDateTime in the ETA class rather than the instance itself
+
   public LocalDateTime getEtaTime() {
     return this.eta.getEta();
   }
 
+
+/* Må slettes
+ public OrderManager orderIndex;
+
+  public OrderManager getOrderIndex() {
+    return orderIndex;
+  }
+*/
+
   public String toString() {
-    return "Order ID: " + this.id + ", Pizza: " + this.pizzas.toString() + ", Price: " + this.totalPrice;
+    return "Order ID: " + this.id +  ", Pizza: " + this.pizzas.toString() + ", Price: " + this.totalPrice + " ETA: " + this.eta;
   }
 }

@@ -33,7 +33,7 @@ public class Pizza {
   }
 
   public String toString() {
-    return this.name + ", " + this.description +"\t\t"+ this.price;
+    return this.name;
   }
 
   //Setter pizzaens beskrivelse
