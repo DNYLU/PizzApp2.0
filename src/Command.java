@@ -131,6 +131,9 @@ public class Command {
       case INDEX_SPECIFIER:
         storeOrder();
         break;
+      default:
+        this.invalidCommandSpecifier();
+        break;
     }
   }
 

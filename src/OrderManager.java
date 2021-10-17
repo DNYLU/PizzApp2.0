@@ -50,9 +50,7 @@ public class OrderManager {
     }
 
     public void popActiveOrder(ArrayList<Integer> indexes) {
-        System.out.println(indexes);
         Collections.sort(indexes);
-        System.out.println(indexes);
 
         for (int i = indexes.size() - 1; i >= 0; i--) {
             //Stores the order so that revenue and statistics can be made at a later time
