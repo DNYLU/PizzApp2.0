@@ -137,6 +137,20 @@ public class Command {
     }
   }
 
+  public void help() {
+    switch (this.commandSpecifier) {
+      case CREATE_COMMAND:
+        //Todo: implement "help new"
+        break;
+      case LIST_COMMAND:
+        //Todo: implement "help ls"
+        break;
+      case STORE_COMMAND:
+        //Todo: implement "help store"
+        break;
+    }
+  }
+
   //Checks if the arguments are within the range of the menu
   //Calls on the orderManager to create a new order with the given pizza number
   public void newOrder() {
@@ -181,7 +195,7 @@ public class Command {
   }
 
   public void newPizza() {
-
+    //Todo: implement this method if there is time
   }
 
   public void storeOrder() {

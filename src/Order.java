@@ -40,7 +40,6 @@ public class Order {
   }
 
   //Returns the LocalDateTime in the ETA class rather than the instance itself
-
   public LocalDateTime getEtaTime() {
     return this.eta.getEta();
   }

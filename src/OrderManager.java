@@ -30,8 +30,9 @@ public class OrderManager {
             int orderIndex = this.activeOrders.size();
             for (int i = 0; i < this.activeOrders.size(); i++) {
                 //When we find the first order that has an eta after the new order we break the loop
-                //The program has found the index it needed
-                if (this.activeOrders.get(i).getEtaTime().isAfter(order.getEta().getEta())) {
+                //The program has found the index it needed so there is no reason to continue the loop
+                //The sorting will actually be incorrect if we continue the loop as it is
+                if (this.activeOrders.get(i).getEtaTime().isAfter(order.getEtaTime())) {
                     orderIndex = i;
                     break;
                 }
