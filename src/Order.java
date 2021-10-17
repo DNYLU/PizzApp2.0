@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.time.LocalDateTime;
 
 public class Order {
-  //Possible solution to the id
   private static int count = 0;
   private int id;
   private ArrayList<Pizza> pizzas;
@@ -10,12 +9,19 @@ public class Order {
   private ETA eta;
 
   public Order(ArrayList<Pizza> pizzas, ETA eta) {
-    //Possible solution to the id
+    // Order ID
     Order.count += 1;
     this.setId(Order.count);
 
     this.setPizzas(pizzas);
     this.setEta(eta);
+
+
+  }
+
+  //test
+  public void setTotalPrice(double totalPrice) {
+    this.totalPrice = totalPrice;
   }
 
   public void setId(int id) {
@@ -38,15 +44,6 @@ public class Order {
   public LocalDateTime getEtaTime() {
     return this.eta.getEta();
   }
-
-
-/* Må slettes
- public OrderManager orderIndex;
-
-  public OrderManager getOrderIndex() {
-    return orderIndex;
-  }
-*/
 
   public String toString() {
     return "Order ID: " + this.id +  ", Pizza: " + this.pizzas.toString() + ", Price: " + this.totalPrice + " ETA: " + this.eta;

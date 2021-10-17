@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Menu {
   public static ArrayList<Pizza> pizzaMenu = new ArrayList<>();
 
-  private static final String COLUMN_FORMAT = "%d. %-15s %s%n"; // TEST
+  //private static final String COLUMN_FORMAT = "%d. %-15s %s%n"; // TEST
 
   public static void createMenu() {
     Pizza vesuvio = new Pizza(1, "Vesuvio", "tomatsauce, ost, skinke og oregano.", 57.00);
@@ -46,7 +46,8 @@ public class Menu {
     for (int i = 0; i < pizzaMenu.size(); i++){
       //System.out.println((i + 1) + ": " + pizzaMenu.get(i));
       System.out.print((i + 1) + ": " + pizzaMenu.get(i).getName() +", "+ pizzaMenu.get(i).getDescription() +" ");
-      System.out.printf(COLUMN_FORMAT, pizzaMenu.get(i).getPrice());
+      System.out.println(pizzaMenu.get(i).getPrice() + ",-");
+      //System.out.printf(COLUMN_FORMAT, pizzaMenu.get(i).getPrice());
      // System.out.format("%d. %-15s %s%n", pizzaMenu.get(i).getPrice());
       System.out.println();
     }

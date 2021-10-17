@@ -78,13 +78,5 @@ public class OrderManager {
         return this.activeOrders;
     }
 
-    /* Må slettes
-    public int orderIndex;
-    public OrderManager(){
-    }
-    public void setOrderIndex(int index) {
-        this.orderIndex = index;
-    }
-*/
 
 }
