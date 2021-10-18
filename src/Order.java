@@ -43,6 +43,6 @@ public class Order {
   }
 
   public String toString() {
-    return "Ordre ID: " + this.id +  ", Pizza: " + this.pizzas.toString() + ", Pris: " + this.totalPrice + " ETA: " + this.eta;
+    return "Ordre ID: " + this.id +  ", Pizza: " + this.pizzas.toString() + ", Pris: " + this.totalPrice + " Anslået leveringstid: " + this.eta;
   }
 }
