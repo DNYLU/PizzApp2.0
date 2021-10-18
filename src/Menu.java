@@ -3,8 +3,6 @@ import java.util.ArrayList;
 public class Menu {
   public static ArrayList<Pizza> pizzaMenu = new ArrayList<>();
 
-  //private static final String COLUMN_FORMAT = "%d. %-15s %s%n"; // TEST
-
   public static void createMenu() {
     Pizza vesuvio = new Pizza(1, "Vesuvio", "tomatsauce, ost, skinke og oregano.", 57.00);
     Pizza amerikaner = new Pizza(2, "Amerikaner", "tomatsauce, ost, oksefars og oregan.", 53.00);
