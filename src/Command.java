@@ -156,6 +156,8 @@ public class Command {
       case STORE_COMMAND:
         this.printCommandStore();
         break;
+      case REMOVE_COMMAND:
+        this.printCommandRemove();
       default:
         this.invalidCommandSpecifier();
     }
@@ -254,7 +256,6 @@ public class Command {
       }
     }
     this.orderManager.removeActiveOrders(indexes);
-    this.orderManager.printActiveOrders();
   }
 
   public Eta createEta() {
@@ -292,6 +293,7 @@ public class Command {
     this.printCommandCreate();
     this.printCommandList();
     this.printCommandStore();
+    this.printCommandRemove();
     this.printCommandExit();
   }
 
@@ -321,6 +323,14 @@ public class Command {
 
     System.out.println();
 
+  }
+
+  public void printCommandRemove() {
+    System.out.println("\"" + this.REMOVE_COMMAND + "\" fjerner en ordre fra den aktive liste som ikke gemmes.");
+    System.out.println("\tHusk at skrive nummeret på den ordre du gerne vil fjerne," +
+            " f.eks. \"" + this.REMOVE_COMMAND + "\" : 1 2 3");
+
+    System.out.println();
   }
 
   public void printCommandExit() {

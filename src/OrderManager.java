@@ -66,6 +66,7 @@ public class OrderManager {
         for (int i = indexes.size() - 1; i >= 0; i--) {
             this.activeOrders.remove(indexes.get(i).intValue());
         }
+        this.printActiveOrders();
     }
 
     public void printActiveOrders() {
