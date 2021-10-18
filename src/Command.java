@@ -166,6 +166,7 @@ public class Command {
   //Checks if the arguments are within the range of the menu
   //Calls on the orderManager to create a new order with the given pizza number
 
+  //Todo: Make a single method to do the error handling for newOrder(), storeOrder and removeOrder
   public void newOrder() {
     String orderAction = "oprettet";
     //We instantiate a new ArrayList to store the pizza numbers in
