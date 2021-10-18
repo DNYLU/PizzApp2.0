@@ -140,7 +140,6 @@ public class Command {
   public void help() {
     switch (this.commandSpecifier) {
       case CREATE_COMMAND:
-        //Todo: implement "help new"
         break;
       case LIST_COMMAND:
         //Todo: implement "help ls"
