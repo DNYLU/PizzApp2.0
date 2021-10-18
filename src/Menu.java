@@ -43,9 +43,6 @@ public class Menu {
 
   public void listMenu() {
     System.out.println("-------------------------------------------------------------------------------------");
-    // Test
-    System.out.format("%-20s %-12s %80s%n", "Pizza", "Indhold", "Pris");
-
     for (int i = 0; i < pizzaMenu.size(); i++){
 /* OG
       System.out.print((i + 1) + ": " + pizzaMenu.get(i).getName() +", "+ pizzaMenu.get(i).getDescription() +" ");
