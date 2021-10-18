@@ -9,7 +9,6 @@ public class Order {
   private ETA eta;
 
   public Order(ArrayList<Pizza> pizzas, ETA eta) {
-    // Order ID
     Order.count += 1;
     this.setId(Order.count);
 
@@ -19,7 +18,6 @@ public class Order {
 
   }
 
-  //test
   public void setTotalPrice(double totalPrice) {
     this.totalPrice = totalPrice;
   }
@@ -45,6 +43,6 @@ public class Order {
   }
 
   public String toString() {
-    return "Order ID: " + this.id +  ", Pizza: " + this.pizzas.toString() + ", Price: " + this.totalPrice + " ETA: " + this.eta;
+    return "Ordre ID: " + this.id +  ", Pizza: " + this.pizzas.toString() + ", Pris: " + this.totalPrice + " ETA: " + this.eta;
   }
 }

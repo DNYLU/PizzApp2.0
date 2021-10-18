@@ -15,7 +15,7 @@ public class PizzApp {
     boolean run = true;
 
     while (run) {
-      System.out.print("Please enter your command -> ");
+      System.out.print("Indtast din kommando -> ");
       //Gets the users command, makes it lowercase and removes any whitespace from the beginning and end of the string
       String userCommand = this.scan.nextLine().toLowerCase().trim();
       //Adds a new line to the console so everything looks clean
