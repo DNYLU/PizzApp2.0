@@ -102,6 +102,7 @@ public class Command {
       case ORDER_SPECIFIER:
         this.newOrder();
       case PIZZA_SPECIFIER:
+        //Todo: implement if there is time
         break;
       default:
         this.invalidCommandSpecifier();
@@ -163,42 +164,46 @@ public class Command {
     }
   }
 
-  //Checks if the arguments are within the range of the menu
-  //Calls on the orderManager to create a new order with the given pizza number
+  public ArrayList<Integer> convertStringsToInts(String orderAction, int targetSize) {
+    String outsideOfRangeMsg = "venligst indtast et nummer inden for menuens længde";
+    ArrayList<Integer> intArray = new ArrayList<>(this.arguments.size());
 
-  //Todo: Make a single method to do the error handling for newOrder(), storeOrder and removeOrder
-  public void newOrder() {
-    String orderAction = "oprettet";
-    //We instantiate a new ArrayList to store the pizza numbers in
-    ArrayList<Integer> pizzaNums = new ArrayList<>();
-
-    String outsideOfRangeMsg = "Venligst indtast et nummer inden for menuens længde";
-
-    //We loop through each argument given by the user and add it to pizzaNums
-    for (int i = 0; i < this.arguments.size(); i++) {
-      int pizzaNum;
+    for (String argument : this.arguments) {
+      int index;
 
       //The program checks if the entered value is a whole number and reacts accordingly if it is not
       try {
-        //We subtract one from the specified index as the users menu goes from 1-30 and our menu from 0-29
-        pizzaNum = Integer.parseInt(this.arguments.get(i)) - 1;
+        //We subtract one from the specified index as out arrays start from 0 and most people starting counting from 1
+        index = Integer.parseInt(argument) - 1;
       } catch (NumberFormatException e) {
-        //We call orderNotCreated and give it the reason why the order was not created
-        this.invalidOrderAction(orderAction, this.arguments.get(i) + " er ikke et helt tal, venligst indtast et hel tal når du indtaster en ny ordre.");
-        //if the cashier didn't enter a whole number then we want to return from this method and not create a new order
-        return;
+        //We call invalidOrderAction and pass the orderAction so that the method can print the correct error message
+        this.invalidOrderAction(orderAction, argument + " er ikke et helt tal, venligst indtast et hel tal når du indtaster en ny ordre.");
+        //if the cashier didn't enter a whole number then we want to return from this method to avoid further errors
+        return new ArrayList<>();
       }
 
-      //If the number entered by the user is less than zero the program will print out an error and return to pizzApp
-      if (pizzaNum < 0) {
-        //orderNotCreated prints out an error message to the user, first argument is the input and the second is the reason
-        this.invalidOrderAction(orderAction, this.arguments.get(i) + " er mindre end 1, " + outsideOfRangeMsg);
-        return;
-      } else if (pizzaNum >= Menu.getPizzaMenu().size()) {
-        this.invalidOrderAction(orderAction, this.arguments.get(i) + " er større end menuens længde, " + outsideOfRangeMsg);
-        return;
+      if (index < 0) {
+        this.invalidOrderAction(orderAction, argument + " er mindre end 1, " + outsideOfRangeMsg);
+        return new ArrayList<>();
+
+      } else if (index >= targetSize) {
+        this.invalidOrderAction(orderAction, argument + " er større end menuens længde, " + outsideOfRangeMsg);
+        return new ArrayList<>();
       }
-      pizzaNums.add(pizzaNum);
+
+      intArray.add(index);
+    }
+    return intArray;
+  }
+
+  //Checks if the arguments are within the range of the menu
+  //Calls on the orderManager to create a new order with the given pizza number
+  //Todo: Make a single method to do the error handling for newOrder(), storeOrder and removeOrder
+  public void newOrder() {
+    ArrayList<Integer> pizzaNums = convertStringsToInts("oprettet", Menu.getPizzaMenu().size());
+
+    if (pizzaNums.isEmpty()) {
+      return;
     }
 
     //Enters a loop where the user is expected to enter the estimated time of arrival
@@ -206,8 +211,6 @@ public class Command {
 
     //Here the program adds the newly created order to the active orders via the orderManager
     this.orderManager.addNewOrder(pizzaNums, eta);
-    //Here the program prints all the active orders to the console via the order Manager
-    this.orderManager.printActiveOrders();
   }
 
   public void newPizza() {
@@ -215,48 +218,21 @@ public class Command {
   }
 
   public void storeOrder() {
-    String orderAction = "gemt";
-    ArrayList<Integer> indexRemover = new ArrayList<>(this.arguments.size());
-    for (int i = 0; i < this.arguments.size(); i++) {
-      try {
-        int index = Integer.parseInt(this.arguments.get(i))-1;
-        indexRemover.add(index);
-      } catch (NumberFormatException e) {
-        this.invalidOrderAction(orderAction, this.arguments.get(i)+" er ikke et helt tal.");
-        return;
-      }
-      if (indexRemover.get(i) >= orderManager.getActiveOrders().size()) {
-        this.invalidOrderAction(orderAction, this.arguments.get(i)+ " er større end menuens længde.");
-        return;
-      }
-    }
+    ArrayList<Integer> storedIndexes = this.convertStringsToInts("gemt", this.orderManager.getActiveOrders().size());
 
-    orderManager.storeActiveOrders(indexRemover);
+    if (storedIndexes.isEmpty()) {
+      return;
+    }
+    orderManager.storeActiveOrders(storedIndexes);
   }
 
   public void removeOrder() {
-    String orderAction = "fjernet";
-    ArrayList<Integer> indexes = new ArrayList<>(this.arguments.size());
+    ArrayList<Integer> removeIndexes = this.convertStringsToInts("fjernet", this.orderManager.getActiveOrders().size());
 
-    int index = 0;
-    for (int i = 0; i < this.arguments.size(); i++) {
-      try {
-        index = Integer.parseInt(this.arguments.get(i)) - 1;
-        indexes.add(index);
-      } catch (NumberFormatException e) {
-        invalidOrderAction(orderAction , this.arguments.get(i) + " er ikke et helt tal, indtast venligst et helt tal");
-        return;
-      }
-
-      if (index > this.orderManager.getActiveOrders().size()) {
-        this.invalidOrderAction(orderAction, " er større end længden på menuen.");
-        return;
-      } else if (index < 0) {
-        this.invalidOrderAction(orderAction, " er mindre end længden på menuen");
-        return;
-      }
+    if (removeIndexes.isEmpty()) {
+      return;
     }
-    this.orderManager.removeActiveOrders(indexes);
+    this.orderManager.removeActiveOrders(removeIndexes);
   }
 
   public Eta createEta() {

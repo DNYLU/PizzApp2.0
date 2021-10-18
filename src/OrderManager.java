@@ -7,20 +7,21 @@ public class OrderManager {
 
     ArrayList<String> pizza = new ArrayList<>();
 
-    public void addNewOrder(ArrayList<Integer> pizzaNums, Eta eta) {
-        ArrayList<Pizza> pizzas = new ArrayList<>(pizzaNums.size());
+    public void addNewOrder(ArrayList<Integer> pizzaIndexes, Eta eta) {
+        ArrayList<Pizza> pizzas = new ArrayList<>(pizzaIndexes.size());
 
-        for (int i = 0; i < pizzaNums.size(); i++) {
+        for (int i = 0; i < pizzaIndexes.size(); i++) {
             //If the value at the specified index is less than zero then Command has spotted an error in the command
             //We do not want to add that negative value to the active orders
-            if (pizzaNums.get(i) >= 0) {
-                pizzas.add(Menu.getPizzaMenu().get(pizzaNums.get(i)));
+            if (pizzaIndexes.get(i) >= 0) {
+                pizzas.add(Menu.getPizzaMenu().get(pizzaIndexes.get(i)));
             }
         }
 
         //Instantiates a new order with all the specified pizzas in it
         Order newOrder = new Order(pizzas, eta);
         this.addToActiveOrders(newOrder);
+        this.printActiveOrders();
     }
 
     public void addToActiveOrders(Order order) {
