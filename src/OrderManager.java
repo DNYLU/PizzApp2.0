@@ -7,7 +7,7 @@ public class OrderManager {
 
     ArrayList<String> pizza = new ArrayList<>();
 
-    public void addNewOrder(ArrayList<Integer> pizzaNums, ETA eta) {
+    public void addNewOrder(ArrayList<Integer> pizzaNums, Eta eta) {
         ArrayList<Pizza> pizzas = new ArrayList<>(pizzaNums.size());
 
         for (int i = 0; i < pizzaNums.size(); i++) {
@@ -42,15 +42,15 @@ public class OrderManager {
         }
     }
 
-    public void popActiveOrder() {
+    public void storeActiveOrders() {
         //Calls the popActiveOrders with an ArrayList that only contains a single element, which is 0
         //So only the first element will be removed
         ArrayList<Integer> firstElement = new ArrayList<>();
         firstElement.add(0);
-        this.popActiveOrder(firstElement);
+        this.storeActiveOrders(firstElement);
     }
 
-    public void popActiveOrder(ArrayList<Integer> indexes) {
+    public void storeActiveOrders(ArrayList<Integer> indexes) {
         Collections.sort(indexes);
 
         for (int i = indexes.size() - 1; i >= 0; i--) {
@@ -60,6 +60,12 @@ public class OrderManager {
             this.activeOrders.remove(indexes.get(i).intValue());
         }
         this.printActiveOrders();
+    }
+
+    public void removeActiveOrders(ArrayList<Integer> indexes) {
+        for (int i = indexes.size() - 1; i >= 0; i--) {
+            this.activeOrders.remove(indexes.get(i).intValue());
+        }
     }
 
     public void printActiveOrders() {

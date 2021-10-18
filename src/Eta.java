@@ -1,14 +1,14 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class ETA {
+public class Eta {
+    private static final String MINUTE_OPTION = "-m";
+    private static final String HOUR_OPTION = "-h";
+
     private LocalDateTime eta;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
-    public ETA(String option, int time) {
-        final String MINUTE_OPTION = "-m";
-        final String HOUR_OPTION = "-h";
-
+    public Eta(String option, int time) {
         int year = LocalDateTime.now().getYear();
         int month = LocalDateTime.now().getMonthValue();
         int day = LocalDateTime.now().getDayOfMonth();
@@ -19,10 +19,10 @@ public class ETA {
         LocalDateTime dateTime = LocalDateTime.of(year, month, day, hour, minute);
 
         switch (option) {
-            case MINUTE_OPTION:
+            case Eta.MINUTE_OPTION:
                 dateTime = dateTime.plusMinutes(time);
                 break;
-            case HOUR_OPTION:
+            case Eta.HOUR_OPTION:
                 dateTime = dateTime.plusHours(time);
                 break;
         }
@@ -40,5 +40,13 @@ public class ETA {
 
     public LocalDateTime getEta() {
         return this.eta;
+    }
+
+    public static String getMinuteOption() {
+        return Eta.MINUTE_OPTION;
+    }
+
+    public static String getHourOption() {
+        return Eta.HOUR_OPTION;
     }
 }
