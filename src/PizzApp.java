@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PizzApp {
@@ -5,12 +6,14 @@ public class PizzApp {
   private Scanner scan = new Scanner(System.in);
 
   public static void main(String[] args) {
-    Menu.createMenu();
+    Menu menu = new Menu();
+    menu.createMenu();
+    ArrayList<Pizza> pizzaMenu = menu.getPizzaMenu();
     PizzApp pizzApp = new PizzApp();
-    pizzApp.run();
+    pizzApp.run(pizzaMenu);
   }
 
-  public void run() {
+  public void run(ArrayList<Pizza> pizzaMenu) {
     //run is responsible for weather or not the program should be running
     boolean run = true;
 
@@ -22,7 +25,7 @@ public class PizzApp {
       System.out.println();
 
       //Creates a new command and passes the users command and the orderManager for this pizzApp to it
-      Command command = new Command(userCommand, this.orderManager);
+      Command command = new Command(userCommand, this.orderManager, pizzaMenu);
       //Executes the evaluateCommand method in Command which returns a boolean
       run = command.evaluateCommand();
     }

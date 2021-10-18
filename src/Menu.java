@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Menu {
   public static ArrayList<Pizza> pizzaMenu = new ArrayList<>();
 
-  public static void createMenu() {
+  public void createMenu() {
     Pizza vesuvio = new Pizza(1, "Vesuvio", "tomatsauce, ost, skinke og oregano.", 57.00);
     Pizza amerikaner = new Pizza(2, "Amerikaner", "tomatsauce, ost, oksefars og oregan.", 53.00);
     Pizza cacciatore = new Pizza(3, "Cacciatore", "tomatsauce, ost, pepperoni og oregano.", 57.00);
@@ -35,7 +35,7 @@ public class Menu {
     pizzaMenu.add(mafia);
   }
 
-  public static ArrayList<Pizza> getPizzaMenu() {
+  public ArrayList<Pizza> getPizzaMenu() {
     return Menu.pizzaMenu;
   }
 

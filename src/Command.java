@@ -7,6 +7,7 @@ public class Command {
   private String commandSpecifier = "";
   private ArrayList<String> arguments = new ArrayList<>();
   private OrderManager orderManager;
+  private ArrayList<Pizza> pizzaMenu;
 
   private final String CREATE_COMMAND = "ny";
   private final String STORE_COMMAND = "gem";
@@ -26,7 +27,8 @@ public class Command {
 
   private final String COMMAND_ARGUMENT_SPLITTER = ":";
 
-  public Command(String command, OrderManager orderManager) {
+  public Command(String command, OrderManager orderManager, ArrayList<Pizza> pizzaMenu) {
+    this.pizzaMenu = pizzaMenu;
     //We instantiate two strings, one to store the primaryCommand and commandSpecifier and one to store the arguments
     String commandAndSpecifier;
     String arguments = "";
@@ -100,7 +102,7 @@ public class Command {
   public void create() {
     switch (this.commandSpecifier) {
       case ORDER_SPECIFIER:
-        this.newOrder();
+        this.newOrder(pizzaMenu);
       case PIZZA_SPECIFIER:
         //Todo: implement if there is time
         break;
@@ -199,8 +201,8 @@ public class Command {
   //Checks if the arguments are within the range of the menu
   //Calls on the orderManager to create a new order with the given pizza number
   //Todo: Make a single method to do the error handling for newOrder(), storeOrder and removeOrder
-  public void newOrder() {
-    ArrayList<Integer> pizzaNums = convertStringsToInts("oprettet", Menu.getPizzaMenu().size());
+  public void newOrder(ArrayList<Pizza> pizzaMenu) {
+    ArrayList<Integer> pizzaNums = convertStringsToInts("oprettet", pizzaMenu.size());
 
     if (pizzaNums.isEmpty()) {
       return;
@@ -210,7 +212,7 @@ public class Command {
     Eta eta = this.createEta();
 
     //Here the program adds the newly created order to the active orders via the orderManager
-    this.orderManager.addNewOrder(pizzaNums, eta);
+    this.orderManager.addNewOrder(pizzaNums, eta, pizzaMenu);
   }
 
   public void newPizza() {
