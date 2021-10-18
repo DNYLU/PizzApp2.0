@@ -185,6 +185,7 @@ public class Command {
       pizzaNums.add(pizzaNum);
     }
 
+    //Enters a loop where the user is expected to enter the estimated time of arrival
     ETA eta = this.createEta();
 
     //Here the program adds the newly created order to the active orders via the orderManager
@@ -217,13 +218,16 @@ public class Command {
   }
 
   public ETA createEta() {
+    //We instantiate the scanner where we will get the input
     Scanner scanner = new Scanner(System.in);
+    //We instantiate the boolean that will determine the loops continued execution
     boolean etaCreated = false;
+    //Sets an ETA instance to null although the flow should ensure that it won't ever return a null value
     ETA eta = null;
 
     while (!etaCreated) {
       System.out.println("Please enter how long before the customer arrives to pick up their order.");
-      System.out.println("minute: \"-m\" or hour: \"-h\" followed by how many minutes/hours.");
+      System.out.println("minute: \"-m\" or hour: \"-h\" followed by how many minutes/hours. fx. -m 10");
       String etaInput = scanner.nextLine().toLowerCase().trim();
       String[] etaInputArray = etaInput.split("\s+");
 
@@ -244,27 +248,39 @@ public class Command {
   }
 
   public void printCommands() {
-    String usedWith = ": used with the below options";
+    this.printCommandCreate();
+    this.printCommandList();
+    this.printCommandStore();
+    this.printCommandExit();
+  }
+
+  public void printCommandCreate() {
     System.out.println("Below are the available commands:");
-    System.out.println("\t" + this.CREATE_COMMAND + usedWith);
-    System.out.println("\t\t" + this.ORDER_SPECIFIER + ": creates a new order");
-    System.out.println("\t\t\tRemember to add the pizzas via their index after an \":\". for example: new order : 1 2 3");
+    System.out.println("\"" + this.CREATE_COMMAND + "\" used with below options.");
+    System.out.println("\t\"" + this.ORDER_SPECIFIER + "\": creates a new order.");
+    System.out.println("\t\tRemember to add the pizzas via their index after an \":\". for example: \"new order : 1 2 3\".");
 
     System.out.println();
+  }
 
-    System.out.println("\t" + this.LIST_COMMAND + usedWith);
-    System.out.println("\t\t" + this.ACTIVE_ORDER_SPECIFIER + ": lists all the active orders.");
-    System.out.println("\t\t" + this.STORED_ORDER_SPECIFIER + ": lists all the stored orders.");
-    System.out.println("\t\t" + this.MENU_SPECIFIER + ": lists the entire menu.");
-
-    System.out.println();
-
-    System.out.println("\t" + this.STORE_COMMAND + ": stores the order with the specified index from the active order list.");
-    System.out.println("\t\tFor example: " + this.STORE_COMMAND + " 1");
+  public void printCommandList() {
+    System.out.println("\"" + this.LIST_COMMAND + "\" used with below options.");
+    System.out.println("\t\"" + this.ACTIVE_ORDER_SPECIFIER + "\": lists all the active orders.");
+    System.out.println("\t\"" + this.STORED_ORDER_SPECIFIER + "\": lists all the stored orders.");
+    System.out.println("\t\"" + this.MENU_SPECIFIER + "\": lists the entire menu.");
 
     System.out.println();
+  }
 
-    System.out.println("\t" + this.EXIT_COMMAND + ": exits the program.");
+  public void printCommandStore() {
+    System.out.println("\"" + this.STORE_COMMAND + "\": used with below options:");
+    System.out.println("\t\"" + this.FIRST_SPECIFIER + "\": stores the first order in the active order list.");
+    System.out.println("\t\"" + this.INDEX_SPECIFIER + "\": stores the orders with the specified indexes. for example \"store index\": 1 2 3.");
+
+  }
+
+  public void printCommandExit() {
+    System.out.println("\t\"" + this.EXIT_COMMAND + "\": exits the program.");
   }
 
   //displayInvalidInput is called by all other methods that prints out errors to the console
