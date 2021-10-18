@@ -131,6 +131,23 @@ public class Command {
       case INDEX_SPECIFIER:
         storeOrder();
         break;
+      default:
+        this.invalidCommandSpecifier();
+        break;
+    }
+  }
+
+  public void help() {
+    switch (this.commandSpecifier) {
+      case CREATE_COMMAND:
+        //Todo: implement "help new"
+        break;
+      case LIST_COMMAND:
+        //Todo: implement "help ls"
+        break;
+      case STORE_COMMAND:
+        //Todo: implement "help store"
+        break;
     }
   }
 
@@ -179,7 +196,7 @@ public class Command {
   }
 
   public void newPizza() {
-
+    //Todo: implement this method if there is time
   }
 
   public void storeOrder() {
