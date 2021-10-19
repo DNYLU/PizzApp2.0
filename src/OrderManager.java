@@ -20,6 +20,7 @@ public class OrderManager {
 
         //Instantiates a new order with all the specified pizzas in it
         Order newOrder = new Order(pizzas, eta, pizzaMenu);
+
         this.addToActiveOrders(newOrder);
         this.printActiveOrders();
     }
