@@ -115,10 +115,14 @@ public class Command {
   public void store() {
     switch (this.commandSpecifier) {
       case FIRST_SPECIFIER:
-        this.orderManager.storeActiveOrders();
+        //Sets arguments to be a new array list to empty it and then adds 1 to it
+        this.arguments = new ArrayList<>();
+        //We add 1 as if the user had typed "this.STORE_COMMAND + " " + this.INDEX_SPECIFIER + " : 1"
+        this.arguments.add("1");
+        this.storeOrder();
         break;
       case INDEX_SPECIFIER:
-        storeOrder();
+        this.storeOrder();
         break;
       default:
         this.invalidCommandSpecifier();
@@ -166,8 +170,8 @@ public class Command {
     }
   }
 
-  public ArrayList<Integer> convertStringsToInts(String orderAction, int targetSize) {
-    String outsideOfRangeMsg = "venligst indtast et nummer inden for menuens længde";
+  public ArrayList<Integer> convertStringsToInts(String orderAction, String targetName, int targetSize) {
+    String outsideOfRangeMsg = "venligst indtast et nummer inden for " + targetName + " længde";
     ArrayList<Integer> intArray = new ArrayList<>(this.arguments.size());
 
     for (String argument : this.arguments) {
@@ -189,7 +193,7 @@ public class Command {
         return new ArrayList<>();
 
       } else if (index >= targetSize) {
-        this.invalidOrderAction(orderAction, argument + " er større end menuens længde, " + outsideOfRangeMsg);
+        this.invalidOrderAction(orderAction, argument + " er for højt et tal, " + outsideOfRangeMsg);
         return new ArrayList<>();
       }
 
@@ -201,7 +205,7 @@ public class Command {
   //Checks if the arguments are within the range of the menu
   //Calls on the orderManager to create a new order with the given pizza number
   public void newOrder(ArrayList<Pizza> pizzaMenu) {
-    ArrayList<Integer> pizzaNums = convertStringsToInts("oprettet", pizzaMenu.size());
+    ArrayList<Integer> pizzaNums = convertStringsToInts("oprettet", "menuen", pizzaMenu.size());
 
     if (pizzaNums.isEmpty()) {
       return;
@@ -219,7 +223,7 @@ public class Command {
   }
 
   public void storeOrder() {
-    ArrayList<Integer> storedIndexes = this.convertStringsToInts("gemt", this.orderManager.getActiveOrders().size());
+    ArrayList<Integer> storedIndexes = this.convertStringsToInts("gemt", "aktive liste", this.orderManager.getActiveOrders().size());
 
     if (storedIndexes.isEmpty()) {
       return;
@@ -228,7 +232,7 @@ public class Command {
   }
 
   public void removeOrder() {
-    ArrayList<Integer> removeIndexes = this.convertStringsToInts("fjernet", this.orderManager.getActiveOrders().size());
+    ArrayList<Integer> removeIndexes = this.convertStringsToInts("fjernet", "aktive liste", this.orderManager.getActiveOrders().size());
 
     if (removeIndexes.isEmpty()) {
       return;
