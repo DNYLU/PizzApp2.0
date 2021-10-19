@@ -42,19 +42,9 @@ public class Menu {
   public void listMenu() {
     System.out.println("-------------------------------------------------------------------------------------");
     for (int i = 0; i < pizzaMenu.size(); i++){
-/* OG
-      System.out.print((i + 1) + ": " + pizzaMenu.get(i).getName() +", "+ pizzaMenu.get(i).getDescription() +" ");
-      System.out.println(pizzaMenu.get(i).getPrice() + ",-"); */
 
-      System.out.print((i + 1) + ": ");
-      System.out.format("%-20s", pizzaMenu.get(i).getName());
-      System.out.format("%-12s", pizzaMenu.get(i).getDescription());
-      System.out.format("%60s%n", pizzaMenu.get(i).getPrice());
-
-     /* System.out.format("%-20s %12s %10s%n", pizzaMenu.get(i).getName() +", "
-              + pizzaMenu.get(i).getDescription() + " " + pizzaMenu.get(i).getPrice() + ",-");
-*/
-
+      System.out.print((i + 1) + ": " + pizzaMenu.get(i).getName() +", "+ pizzaMenu.get(i).getDescription() +"................." +
+          pizzaMenu.get(i).getPrice() + ",-");
       System.out.println();
     }
     System.out.println("-------------------------------------------------------------------------------------");
