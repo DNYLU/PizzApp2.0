@@ -23,10 +23,6 @@ public class Order {
     }
   }
 
-/*  public void setTotalPrice(double totalPrice) {
-    this.totalPrice = totalPrice;
-  }
-*/
   public void setId(int id) {
     this.id = id;
   }
@@ -42,10 +38,6 @@ public class Order {
   public Eta getEta() {
     return this.eta;
   }
-
- /* public double getTotalPrice() {
-    return totalPrice;
-  }*/
 
   //Returns the LocalDateTime in the ETA class rather than the instance itself
   public LocalDateTime getEtaTime() {
