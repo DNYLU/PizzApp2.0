@@ -245,7 +245,7 @@ public class Command {
     Eta eta = null;
 
     while (!etaCreated) {
-      System.out.println("Venligst indtast hvornår kommer ankommer for at hente deres bestilling.");
+      System.out.println("Venligst indtast hvornår kunden ankommer for at hente sin bestilling.");
       System.out.println("minut: \" " + Eta.getMinuteOption() + "\" eller time: \"" + Eta.getHourOption() +
               "\" efterfulgt af hvor mange min/timer. f.eks. -m 10");
       String etaInput = scanner.nextLine().toLowerCase().trim();
