@@ -115,11 +115,7 @@ public class Command {
   public void store() {
     switch (this.commandSpecifier) {
       case FIRST_SPECIFIER:
-        //Sets arguments to be a new array list to empty it and then adds 1 to it
-        this.arguments = new ArrayList<>();
-        //We add 1 as if the user had typed "this.STORE_COMMAND + " " + this.INDEX_SPECIFIER + " : 1"
-        this.arguments.add("1");
-        this.storeOrder();
+        this.orderManager.storeActiveOrders();
         break;
       case INDEX_SPECIFIER:
         this.storeOrder();
