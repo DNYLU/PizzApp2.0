@@ -53,9 +53,6 @@ public class OrderManager {
     }
 
     public void storeActiveOrders(ArrayList<Integer> indexes) {
-        if (this.activeOrders.isEmpty()) {
-            return;
-        }
         Collections.sort(indexes);
 
         for (int i = indexes.size() - 1; i >= 0; i--) {

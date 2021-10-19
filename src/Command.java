@@ -115,10 +115,10 @@ public class Command {
   public void store() {
     switch (this.commandSpecifier) {
       case FIRST_SPECIFIER:
-        this.orderManager.storeActiveOrders();
+        this.storeFirstOrder();
         break;
       case INDEX_SPECIFIER:
-        this.storeOrder();
+        this.storeOrders();
         break;
       default:
         this.invalidCommandSpecifier();
@@ -218,8 +218,20 @@ public class Command {
     //Todo: implement this method if there is time
   }
 
-  public void storeOrder() {
-    ArrayList<Integer> storedIndexes = this.convertStringsToInts("gemt", "aktive liste", this.orderManager.getActiveOrders().size());
+  public void storeFirstOrder() {
+    this.arguments = new ArrayList<>();
+    this.arguments.add("1");
+
+    ArrayList<Integer> firstIndex = this.convertStringsToInts("gemt", "aktive listes", this.orderManager.getActiveOrders().size());
+    if (firstIndex.isEmpty()) {
+      return;
+    }
+
+    this.orderManager.storeActiveOrders();
+  }
+
+  public void storeOrders() {
+    ArrayList<Integer> storedIndexes = this.convertStringsToInts("gemt", "aktive listes", this.orderManager.getActiveOrders().size());
 
     if (storedIndexes.isEmpty()) {
       return;
